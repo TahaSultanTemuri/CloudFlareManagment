@@ -1,0 +1,132 @@
+extends layouts/_layout.pug
+
+block content
+    .col-md-4.col-md-offset-4
+        div
+            p Dashboard 
+        hr
+        if(user.role == 'Admin')
+            div(style="display: flex; justify-content: space-around;")
+                button.btn.btn-success(data-toggle="modal" data-target="#AddCustomer") Add Customer
+                //- button.btn.btn-success(onClick="submit()"): a(href='/register' style="text-decoration: none; color: #Ffff") Add User
+                button.btn.btn-secondary(onClick="logout()") logout
+            hr
+            div
+                h4 All Customers
+                table.table.table-striped.table-bordered
+                    thead
+                        tr
+                            th(scope="col") No
+                            th(scope="col") Name
+                            th(scope="col") Email
+                             th(scope="col") Alternate Email
+                            th(scope="col") 3rd Level Domain
+                            th(scope="col") Domain Redirect
+                            th(scope="col") Address
+                            th(scope="col") Phone
+                            th(scope="col") Actions
+                    tbody
+                        each customer, index in customerList
+                            tr
+                                th(scope="row")= (index + 1)
+                                td= customer.name
+                                td= customer.email
+                                td= customer.aemail
+                                td= customer.thirdLevelDomain
+                                td= customer.domainRedirect
+                                td= customer.address
+                                td= customer.phone
+                                td
+                                    a(href="#" data-toggle="modal" data-target="#EditCustomerModal" data-customer-id=customer.id onclick="getById(this.getAttribute('data-customer-id'))") Edit
+                                    a(href="#" data-customer-id=customer.id onclick="deleteById(this.getAttribute('data-customer-id'))" style="color: red;") Delete
+
+            
+            .modal.fade(id="AddCustomer" tabindex="-1" role="dialog" aria-labelledby="Add new Customer" aria-hidden="true")
+                .modal-dialog(role="document")
+                    .modal-content
+                        .modal-header
+                            h3.modal-title Add new Customer
+                            .modal-body
+                            .form-group
+                                input.form-control(type='text' name='name' placeholder='Name' id="name" required)
+                                br
+                                input.form-control(type='text' name='email' placeholder='E-mail' id="email" required)
+                                br
+                                input.form-control(type='text' name='aemail' placeholder='Alternate E-mail' id="aemail")
+                                br
+                                input.form-control(type='text' name='thirdLevelDomain' placeholder='3rd Level Domain Assigned' id="thirdLevelDomain" required)
+                                br
+                                input.form-control(type='text' name='domainRedirect' placeholder='Domain Redirect to new link' id="domainRedirect" required)
+                                br
+                                input.form-control(type='text' name='address' placeholder='Address' id="address")
+                                br
+                                input.form-control(type='text' name='phone' placeholder='Phone#' id="phone")
+                        .modal-footer
+                            button.btn.btn-secondary(type="button" data-dismiss="modal") Close
+                            button.btn.btn-primary(type="button" onClick="submit()") Submit
+                            
+            .modal.fade(id="EditCustomerModal" tabindex="-1" role="dialog" aria-labelledby="Add new Customer" aria-hidden="true")
+                .modal-dialog(role="document")
+                    .modal-content
+                        .modal-header
+                            h3.modal-title Update Customer 
+                            .modal-body
+                            .form-group
+                                input.form-control(type='text' name='name' placeholder='Name' id="edit-name" required)
+                                br
+                                input.form-control(type='text' name='email' placeholder='E-mail' id="edit-email" required)
+                                br
+                                input.form-control(type='text' name='aemail' placeholder='Alternate E-mail' id="edit-aemail" )
+                              
+                                br
+                                input.form-control(type='text' name='thirdLevelDomain' placeholder='3rd Level Domain Assigned' id="edit-thirdLevelDomain" required)
+                                br
+                                input.form-control(type='text' name='domainRedirect' placeholder='Domain Redirect to new link' id="edit-domainRedirect" required) 
+                                br
+                                input.form-control(type='text' name='address' placeholder='Address' id="edit-address" required) 
+                                br
+                                input.form-control(type='text' name='phone' placeholder='phone' id="edit-phone" required)
+                                input.form-control(type='hidden' name='password'  id="edit-password")
+                                input.form-control(type='hidden' name='id'  id="edit-customer-id")
+                        .modal-footer
+                            button.btn.btn-secondary(type="button" data-dismiss="modal") Close
+                            button.btn.btn-primary(type="button" onClick="submitUpdateAdmin(this.getAttribute('data-customer-id'))") Submit
+
+           
+        else
+            div(style="display: flex; justify-content: space-around;")
+                button.btn.btn-success(data-toggle="modal" data-target="#EditCustomerModal") Profile
+                button.btn.btn-secondary(onClick="logout()") logout
+            hr
+            p
+                | Login Successfully
+            .modal.fade(id="EditCustomerModal" tabindex="-1" role="dialog" aria-labelledby="Add new Customer" aria-hidden="true")
+                .modal-dialog(role="document")
+                    .modal-content
+                        .modal-header
+                            h3.modal-title Update Customer
+                            .modal-body
+                            .form-group
+                                input.form-control(type='text' name='name' placeholder='Name' id="edit-name" value=customer.name required)
+                                br
+                                input.form-control(type='text' name='email' placeholder='E-mail' id="edit-email" value=customer.email required)
+                                br
+                                input.form-control(type='text' name='aemail' placeholder='Alternate E-mail' id="edit-aemail" value=customer.aemail )
+                              
+                                br
+                                input.form-control(type='text' name='thirdLevelDomain' placeholder='3rd Level Domain Assigned' value=customer.thirdLevelDomain id="edit-thirdLevelDomain" disabled)
+                                br
+                                input.form-control(type='text' name='domainRedirect' placeholder='Domain Redirect to new link' value=customer.domainRedirect id="edit-domainRedirect")
+                                br
+                                input.form-control(type='text' name='address' placeholder='Address' value=customer.address id="edit-address")
+                                br
+                                input.form-control(type='text' name='phone' placeholder='Phone' value=customer.phone id="edit-phone") 
+                                br
+                                input.form-control(type='password' name='password' placeholder='Password' id="edit-password") 
+                                input.form-control(type='hidden' name='id'  id="edit-customer-id" value=user.customerID)
+                        .modal-footer
+                            button.btn.btn-secondary(type="button" data-dismiss="modal") Close
+                            button.btn.btn-primary(type="button" onClick="submitUpdate(this.getAttribute('data-customer-id'))") Submit
+block specific-js
+    script( src="/js/selection.js")
+    
