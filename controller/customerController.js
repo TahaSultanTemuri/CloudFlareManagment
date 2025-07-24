@@ -12,7 +12,7 @@ const customerService = require("../service/customerService");
 
 
 // API=https://api.cloudflare.com/client/v4/
-// XAuthEmail=schedy80@gmail.com
+// XAuthEmail=abc@gmail.com
 // XAuthKey=bfa1f1d6a80ca25c62a5df71519b420175981
 // ZONEID=c6564307112774e9cf4b745d7515bebc
 // DOMAIN=ocdbiz.cloud

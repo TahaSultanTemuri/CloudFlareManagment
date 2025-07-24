@@ -5,7 +5,7 @@ const ZONE_ID = '276ab55cdf02730f33620a1091f4c0ba'; // You can obtain this from 
 
 const API = 'https://api.cloudflare.com/client/v4/';
 
-const XAuthEmail = 'schedy80@gmail.com';
+const XAuthEmail = 'abc@gmail.com';
 
 const XAuthKey = 'bfa1f1d6a80ca25c62a5df71519b420175981';
 
