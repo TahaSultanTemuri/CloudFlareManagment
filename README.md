@@ -4,10 +4,6 @@
 </h1>
 
 
-<p align="center">
-  <a href="/LICENSE"><img src="https://img.shields.io/github/license/guruhariharaun/Registration-and-Login-Form-in-Nodejs-and-MongoDB.svg?style=flat-square"></a>
-</p>
-
 
 ## What is this for?
 This is a Simple User Registration & Login systems app done with Node.js Framework using MongoDB(Atlas) as the data store, Express as the routing system, Body-parser as the parser for webpage, Express-session used  to track the user's session and of course Mongoose to make interacting with Mongo from Node easy.
@@ -77,22 +73,3 @@ node server.js
 The server will start Running on
 + http://localhost:3000/
 
-
-## Author
-
-| Author                | Profile Link                                       |
-| --------------------- | :------------------------------------------------- |
-| **Guru HariHaraun N** | **[Guru Roxz](https://github.com/guruhariharaun)** |
-
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used.
-* Special mention to all the Nodejs dev's on youtube 😜
-
-<br><br>
-<div align="center">
-<a href="https://www.buymeacoffee.com/YwGKcxa" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a></div>
-<p align="center">
-  Made with ❤️ by <a href="https://github.com/guruhariharaun">Guru Roxz</a>
-</p>
